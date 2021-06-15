@@ -1,6 +1,8 @@
 const { createCanvas, loadImage } = require('canvas')
 let w = 720*2;
 let h = 1280*2;
+let wh = w/2;
+let hh = h/2;
 const canvas = createCanvas(w, h)
 const ctx = canvas.getContext('2d')
 
@@ -31,8 +33,8 @@ module.exports = async (quality = 0.6)=>{
     ctx.fillStyle = `rgba(255, 255, 255,1)`
     ctx.fillRect(0,0, w, h)
     ctx.fill()
-    resizedCtx.drawImage(canvas, 0, 0, w/2, h/2)
-    let mask = resizedCtx.getImageData(0,0,w/2, h/2);
+    resizedCtx.drawImage(canvas, 0, 0, wh, hh)
+    let mask = resizedCtx.getImageData(0,0, wh, hh);
     ctx.fillStyle = `rgba(${light+temperature}, ${light}, ${light-temperature},1)`
     ctx.fillRect(0,0, w, h)
     ctx.fill()
@@ -60,24 +62,24 @@ module.exports = async (quality = 0.6)=>{
 
 
 
-    resizedCtx.drawImage(canvas, 0, 0, w/2, h/2)
+    resizedCtx.drawImage(canvas, 0, 0, wh, hh)
 
 
     let compressed = resizedCanvas.toDataURL('image/jpeg', quality);
     const myimg = await loadImage(compressed);
     resizedCtx.drawImage(myimg,0,0)
-    let result = resizedCtx.getImageData(0,0,w, h);
+    let result = resizedCtx.getImageData(0,0,wh, hh);
 
     let origin = ctx.getImageData(0,0,w, h);
 
     let out ={ width:w, height:h};
-    out.mask = new Uint8Array(w*h)
-    for(let i=0;i!==w*h;i++){
+    out.mask = new Uint8Array(wh*hh)
+    for(let i=0;i!==wh*hh;i++){
         out.mask[i] = mask.data[i*4]
     }
 
-    out.result = new Uint8Array(w*h)
-    for(let i=0;i!==w*h;i++){
+    out.result = new Uint8Array(wh*hh)
+    for(let i=0;i!==wh*hh;i++){
         out.result[i] = result.data[i*4]
     }
     out.origin = new Uint8Array(w*h)
