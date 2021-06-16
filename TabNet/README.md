@@ -9,4 +9,3 @@
 #### ```!pip install -r {"requirements.txt"}```
 #### ```!pip install pillow==6.2.1```
 #### ```!pip install mmcv==0.4.3```
-#### ```!gdown "https://drive.google.com/drive/folders/19qMDNMWgw04T0HCQ_jADq1OvycF3zvuO"```
