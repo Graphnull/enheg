@@ -1,15 +1,10 @@
-const { createCanvas, loadImage } = require('canvas')
 let sharp = require('sharp/lib/index');
 let w = 720*2;
 let h = 1280*2;
 let wh = w/2;
 let hh = h/2;
 
-const canvas = createCanvas(w, h)
-const ctx = canvas.getContext('2d')
 
-const resizedCanvas = createCanvas(w/2, h/2)
-const resizedCtx = resizedCanvas.getContext('2d')
 
 module.exports = async (quality = 60)=>{
 
@@ -27,10 +22,6 @@ module.exports = async (quality = 60)=>{
     
 
     let alphabet = 'йцукенгшщзхъфывапрололджэ\ячсмитьбю.ЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭ/ЯЧСМИТЬБЮ,1234567890!"№;%:?*()-=_+'
-
-
-    ctx.font = '24px "Times new roman"'
-    ctx.fillStyle = 'rgba(0,0,0,0.8)'
 
     let text = 'Awesome!'
     let width = 100;
