@@ -41,14 +41,23 @@ os.makedirs(test_dataset_path)
 os.makedirs(val_dataset_path)
 os.makedirs(train_dataset_path)
 
+f = open(f'{train_dataset_path}/coco.txt', "a")
 for indice in train_dataset_indices:
+	f.write(f'{indice}\n')
 	shutil.copy2(f'{path_to_anno_folder}/{indice}.xml', f'{train_dataset_path}{indice}.xml')
 	shutil.copy2(f'{path_to_anno_folder}/{indice}.jpg', f'{train_dataset_path}{indice}.jpg')
+f.close()
 
+f = open(f'{test_dataset_path}/coco.txt', "a")
 for indice in test_dataset_indices:
+	f.write(f'{indice}\n')
 	shutil.copy2(f'{path_to_anno_folder}/{indice}.xml', f'{test_dataset_path}{indice}.xml')
 	shutil.copy2(f'{path_to_anno_folder}/{indice}.jpg', f'{test_dataset_path}{indice}.jpg')
-	
+f.close()
+
+f = open(f'{val_dataset_path}/coco.txt', "a")
 for indice in val_dataset_indices:
+	f.write(f'{indice}\n')
 	shutil.copy2(f'{path_to_anno_folder}/{indice}.xml', f'{val_dataset_path}{indice}.xml')
 	shutil.copy2(f'{path_to_anno_folder}/{indice}.jpg', f'{val_dataset_path}{indice}.jpg')
+f.close()
