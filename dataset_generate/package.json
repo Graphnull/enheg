@@ -18,7 +18,6 @@
   "homepage": "https://github.com/Graphnull/enheg#readme",
   "dependencies": {
     "@tensorflow/tfjs-node": "^3.7.0",
-    "canvas": "^2.8.0",
-    "jimp": "^0.16.1"
+    "sharp": "^0.28.3"
   }
 }
