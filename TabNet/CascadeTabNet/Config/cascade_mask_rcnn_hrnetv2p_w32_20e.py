@@ -260,7 +260,7 @@ log_config = dict(
     ])
 # yapf:enable
 # runtime settings
-total_epochs = 36
+total_epochs = 40
 dist_params = dict(backend='nccl')
 log_level = 'INFO'
 work_dir = '/content/new_chunk_cascade_mask_rcnn_hrnetv2p_w32_20e'
