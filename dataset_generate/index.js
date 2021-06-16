@@ -1,5 +1,5 @@
 const { createCanvas, loadImage } = require('canvas')
-let sharp = require('sharp');
+let sharp = require('sharp/lib/index');
 let w = 720*2;
 let h = 1280*2;
 let wh = w/2;
@@ -67,4 +67,3 @@ module.exports = async (quality = 60)=>{
 
     return out
 }
-
