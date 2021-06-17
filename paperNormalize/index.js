@@ -134,10 +134,10 @@ let main = async ()=>{
         hG = hG.slice(32)
         hB = hB.slice(32)
 
-        let blockLightsResized = await sharp(blockLights.map(v=>v*4+4),{raw:{width:bW, height:bH, channels:3}})
+        let blockLightsResized = await sharp(blockLights.map(v=>v*4-12),{raw:{width:bW, height:bH, channels:3}})
         .resize(info.width,info.height).toBuffer()
-        let blockDarksResized = await sharp(blockDarks.map(v=>v*4),{raw:{width:bW, height:bH, channels:3}})
-        .resize(info.width,info.height).toBuffer()
+        // let blockDarksResized = await sharp(blockDarks.map(v=>v*4),{raw:{width:bW, height:bH, channels:3}})
+        // .resize(info.width,info.height).toBuffer()
         //находим контраст по самой светлой части и самой темной
         
 
@@ -150,8 +150,8 @@ let main = async ()=>{
             data[p*3+1]=Math.clamp((data[p*3+1]-minV[1])*lightG,0,255);
             data[p*3+2]=Math.clamp((data[p*3+2]-minV[2])*lightB,0,255);
         }
-        await sharp(blockLightsResized,{raw:{width:info.width, height:info.height, channels:3}})
-        .png().toFile('./normalizedFiles/'+ fileName.slice(0, -4)+'small.png')
+        //await sharp(blockLightsResized,{raw:{width:info.width, height:info.height, channels:3}})
+        //.png().toFile('./normalizedFiles/'+ fileName.slice(0, -4)+'small.png')
         await sharp(data,{raw:{width: info.width,height: info.height,channels:3}})
             .extract({top:minY*blockSize,left:0, width:info.width, height:Math.min(info.height-minY*blockSize,(maxY - minY)*blockSize)})
             .png().toFile('./normalizedFiles/'+ fileName.slice(0, -4)+'.png');
