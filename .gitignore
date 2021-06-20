@@ -104,3 +104,12 @@ dist
 .tern-port
 
 paperNormalize/normalizedFiles/*
+
+main/bin/*
+main/__pycache__/*
+main/lib/*
+main/lib64/*
+main/lib64
+main/share/*
+main/pyvenv*
+
