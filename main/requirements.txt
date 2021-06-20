@@ -1,0 +1,9 @@
+pytesseract
+easyocr
+image_to_numpy
+mmdet==2.3.0
+torch==1.5.1+cpu
+torchvision==0.6.1+cpu
+mmcv-full==1.0.5
+opencv_python
+networkx

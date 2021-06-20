@@ -7,13 +7,13 @@ import easyocr
 
 # Load model
 config_file = 'cascade_mask_rcnn_hrnetv2p_w32_20e.py'
-checkpoint_file = '/content/drive/My Drive/torch/tableTrained/epoch_195_converted_V2.pth'
+checkpoint_file = 'epoch_195_converted_V2.pth'
 model = init_detector(config_file, checkpoint_file, device='cpu')
 
 # Test a single image 
 
 
-image_path = '/content/313.jpg' #оак5???  35???
+image_path = './3.jpg' #оак5???  35???
 _image = image_to_numpy.load_image_file(image_path, mode="RGB")
 image = np.copy(_image)
 if image.shape[1]> image.shape[0]:
