@@ -106,6 +106,9 @@ dist
 paperNormalize/normalizedFiles/*
 
 dataset_generate/cells/*
+cells/right_column/*
+dataset_generate/leftCells/*
+dataset_generate/rightCells/*
 
 main/bin/*
 main/__pycache__/*
