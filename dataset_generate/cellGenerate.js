@@ -1,4 +1,5 @@
 let sharp = require('sharp/lib/index');
+let fs = require('fs')
 let w = 186;
 let h = 36;
 
@@ -231,22 +232,50 @@ let right = async (params = {}) => {
 }
 
 let main = async () => {
-    for (let i = 0; i !== 5000; i++) {
+    for (let i = 0; i !== 0; i++) {
         let res = await left({ rotate: 5 })
         await sharp(res.result, { raw: { width: res.width, height: res.height, channels: 3 } }).jpeg({ quality: 100 }).toFile('./leftCells/' + res.text + '.jpg')
     }
     let constAlp = ['см.комм.', 'отрицат.', 'необнар.','необнар','комм.','см.комм', 'комм.см','комм.см.','ко.мм.см','нет','светло-желтый','желтый', 'обнаружено','полная','неполная','результат']
     
     for(let i=0;i!== constAlp.length;i++){
-        let res = await left({ rotate: 5, text: constAlp[i] })
-        await sharp(res.result, { raw: { width: res.width, height: res.height, channels: 3 } }).jpeg({ quality: 100 }).toFile('./leftCells/' + res.text + '.jpg')
+        let res = await right({ rotate: 5, text: constAlp[i] })
+        await sharp(res.result, { raw: { width: res.width, height: res.height, channels: 3 } }).jpeg({ quality: 100 }).toFile('./rightCells/' + res.text + '.jpg')
     }
     for (let i = 0; i !== 0; i++) {
         let res = await right({ rotate: 5 })
         await sharp(res.result, { raw: { width: res.width, height: res.height, channels: 3 } }).jpeg({ quality: 100 }).toFile('./rightCells/' + res.text + '.jpg')
     }
+
+ 
+
+
 }
 
 
-main();
+//main();
+let files=fs.readdirSync('./rightCells');
+let al = {}
+files.forEach(f=>f.slice(0,-4).split('').forEach(a=>al[a]=1))
+
+console.log(Object.keys(al).sort());
+
+files=fs.readdirSync('./../../right_column');
+let al2 = {}
+files.forEach(f=>f.slice(0,-4).split('').forEach(a=>{
+
+    if(f.indexOf('%')>-1){
+        console.log('fff',f)
+    }
+    if(f.slice(-4)!=='.kra' && f.slice(-1)!=='~'){
+        
+        if(!al[a]){
+        console.log(f, a);
+    }
+    al2[a]=1
+    }
+    
+}))
+
+console.log(Object.keys(al2).sort());
 
