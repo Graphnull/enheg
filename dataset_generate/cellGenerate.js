@@ -45,6 +45,7 @@ let left = async (params = {}) => {
     text = text.join('')
     text= text.trim()
 
+    text = text.slice(0,15)//убираем перенос строки
     //text = 'Базофилы, %'
     let width = text.length * 10
     let x = 10;
@@ -144,7 +145,7 @@ let right = async (params = {}) => {
 
     let degree = Math.random() * 2 * params.rotate - params.rotate;
 
-    let Ralphabet = '1234567890,.-*%<>+()'
+    let Ralphabet = '1234567890,.-*<>+()'
 
 
     let texts = []
@@ -158,11 +159,10 @@ let right = async (params = {}) => {
             text=text.slice(0,-2)+(Math.random()<0.5?'.':',')+char
         }
     }
-
-    if (Math.random() < 0.1 && !redBack) {
-        let constAlp = ['см.комм.', 'отрицат.', 'необнар.','необнар','комм.','см.комм', 'комм.см','комм.см.','ко.мм.см','нет','светло-желтый','желтый', 'обнаружено','полная','неполная']
-        text = constAlp[Math.floor(Math.random() * constAlp.length)]
+    if(params.text){
+        text=params.text
     }
+
 
     //text = 'Базофилы, %'
     let width = text.length * 10
@@ -231,11 +231,17 @@ let right = async (params = {}) => {
 }
 
 let main = async () => {
-    for (let i = 0; i !== 0; i++) {
+    for (let i = 0; i !== 5000; i++) {
         let res = await left({ rotate: 5 })
         await sharp(res.result, { raw: { width: res.width, height: res.height, channels: 3 } }).jpeg({ quality: 100 }).toFile('./leftCells/' + res.text + '.jpg')
     }
-    for (let i = 0; i !== 5000; i++) {
+    let constAlp = ['см.комм.', 'отрицат.', 'необнар.','необнар','комм.','см.комм', 'комм.см','комм.см.','ко.мм.см','нет','светло-желтый','желтый', 'обнаружено','полная','неполная','результат']
+    
+    for(let i=0;i!== constAlp.length;i++){
+        let res = await left({ rotate: 5, text: constAlp[i] })
+        await sharp(res.result, { raw: { width: res.width, height: res.height, channels: 3 } }).jpeg({ quality: 100 }).toFile('./leftCells/' + res.text + '.jpg')
+    }
+    for (let i = 0; i !== 0; i++) {
         let res = await right({ rotate: 5 })
         await sharp(res.result, { raw: { width: res.width, height: res.height, channels: 3 } }).jpeg({ quality: 100 }).toFile('./rightCells/' + res.text + '.jpg')
     }
