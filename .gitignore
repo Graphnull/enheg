@@ -104,4 +104,14 @@ dist
 .tern-port
 
 paperNormalize/normalizedFiles/*
+
 dataset_generate/cells/*
+
+main/bin/*
+main/__pycache__/*
+main/lib/*
+main/lib64/*
+main/lib64
+main/share/*
+main/pyvenv*
+
